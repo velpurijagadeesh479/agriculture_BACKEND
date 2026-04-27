@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByBuyerIdOrderByCreatedAtDesc(Integer buyerId);
     Optional<Order> findByIdAndBuyerId(Integer id, Integer buyerId);
+    List<Order> findAllByOrderByCreatedAtDesc();
 
     @Query("SELECT COALESCE(SUM(o.totalAmount), 0) FROM Order o WHERE o.paymentStatus = 'paid'")
     BigDecimal getTotalRevenue();
